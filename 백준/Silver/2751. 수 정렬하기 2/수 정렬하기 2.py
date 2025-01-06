@@ -1,8 +1,7 @@
 import sys
 
-n = int(sys.stdin.readline().rstrip())
+n = int(input())
 lst = [int(sys.stdin.readline().rstrip()) for _ in range(n)]
 lst.sort()
 
-for e in lst:
-    print(e)
+print('\n'.join(map(str, lst)))
