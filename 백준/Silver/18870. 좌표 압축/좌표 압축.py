@@ -8,16 +8,10 @@ def main():
     N = int(sys.stdin.readline().rstrip())
     X = list(map(int, sys.stdin.readline().rstrip().split()))
     
-    set_X = sorted(set(X))
-    dict_X = {}
-    for i, x in enumerate(set_X):
-        dict_X[x] = i
-        
-    for i, x in enumerate(X):
-        X[i] = dict_X[x]
-        
-    X = list(map(str, X))
-    sys.stdout.write(" ".join(X) + "\n")
+    uniqueX = sorted(set(X))
+    mapping = {x: i for i, x in enumerate(uniqueX)}
+    result = [str(mapping[x]) for x in X]
+    sys.stdout.write(" ".join(result) + "\n")
 
 if __name__ == "__main__":
     main()
