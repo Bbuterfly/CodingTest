@@ -3,52 +3,44 @@ from collections import deque
 
 def bfs(n, m):
     graph = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
-    
-    # 시작점(값이 2인 곳) 찾기
-    start = None
-    for y in range(n):
-        for x in range(m):
-            if graph[y][x] == 2:
-                start = (y, x)
-                break
-        if start:
-            break
-
-    # 거리 배열 초기화
+    v = ()
+    for j in range(n):
+        for i in range(m):
+            if graph[j][i] == 2:
+                v = (j, i)
+        
     dist = [[-1] * m for _ in range(n)]
-    dist[start[0]][start[1]] = 0  # 시작점 거리 0
-    
     queue = deque()
-    queue.append(start)
-
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # 상하좌우
-
+    queue.append(v)
+    col, row = v[0], v[1]
+    dist[col][row] = 0
+    d = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
     while queue:
         y, x = queue.popleft()
-
-        for dy, dx in directions:
-            ny, nx = y + dy, x + dx
-
-            if 0 <= ny < n and 0 <= nx < m:
+        
+        for dx, dy in d:
+            nx, ny = x + dx, y + dy
+            
+            if 0<= ny < n and 0<= nx < m:
                 if graph[ny][nx] == 1 and dist[ny][nx] == -1:
                     dist[ny][nx] = dist[y][x] + 1
                     queue.append((ny, nx))
-
-    # 출력
-    for y in range(n):
-        for x in range(m):
-            if graph[y][x] == 0:
+    
+    for j in range(n):
+        for i in range(m):
+            if graph[j][i] == 0:
                 print(0, end=' ')
             else:
-                print(dist[y][x], end=' ')
+                print(dist[j][i], end=' ')
         print()
 
 def main():
     '''
-    n : 세로 길이, 2 <= n <= 1000
-    m : 가로 길이, 2 <= m <= 1000
+    n : 세로의 길이, 2<=n<=10^3
+    m : 가로의 길이, 2<=m<=10^3
     '''
-    n, m = map(int, sys.stdin.readline().split())
+    n, m = map(int, sys.stdin.readline().rstrip().split())
     bfs(n, m)
 
 if __name__ == "__main__":
