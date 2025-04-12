@@ -1,5 +1,14 @@
 import sys
-import math
+
+def combination(n, k):
+    if k > n - k:
+        k = n - k
+    result = 1
+    for i in range(1, k+1):
+        result *= n
+        result //= i
+        n -= 1
+    return result
 
 def main():
     '''
@@ -7,7 +16,7 @@ def main():
     K: 정수, 0<=K<=N
     '''
     N, K = map(int, sys.stdin.readline().rstrip().split())
-    print(math.factorial(N) // (math.factorial(N-K) * math.factorial(K)))
+    print(combination(N, K))
 
 if __name__ == "__main__":
     main()
