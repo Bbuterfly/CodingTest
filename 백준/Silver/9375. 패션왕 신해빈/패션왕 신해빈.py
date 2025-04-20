@@ -10,6 +10,12 @@ def get_number_cases(fashion):
     return tot - 1
 
 def main():
+    '''
+    tc : 첫째 줄의 테스트 케이스의 수, 1<=tc<=10^2
+    n : 해빈이가 가진 의상의 수, 0<=n<=30
+    다음 n 개의 줄에서 공백을 기준으로 의상의 이름과 종류가 입력
+    '''
+    
     tc = int(input())
     
     answer = []
